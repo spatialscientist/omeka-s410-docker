@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  mariadb:
+    image: mariadb:latest 
+    restart: always
+    networks:
+      - omeka-s404-network
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: omekas 
+      MYSQL_DATABASE: omekas
+      MYSQL_USER: omekas
+      MYSQL_PASSWORD: omekas
+
+  pma:
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    networks:
+      - omeka-s404-network
+    ports:
+      - "8080:80"
+    links:
+      - mariadb:db
+
+  omeka:
+    depends_on:
+      - mariadb
+    build: ./
+    image: 67911151/omekas404docker:latest
+    restart: always
+    networks:
+      - omeka-s404-network
+    ports:
+      - "80:80"
+    links:
+      - mariadb:db
+    volumes:
+      - omeka:/var/www/html/volume
+
+volumes:
+  mariadb:
+  omeka:
+
+networks:
+  omeka-s404-network:  
