@@ -5,7 +5,7 @@ services:
     image: mariadb:latest 
     restart: always
     networks:
-      - omeka-s404-network
+      - omeka-s410-network
     volumes:
       - mariadb:/var/lib/mysql
     environment:
@@ -20,7 +20,7 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     networks:
-      - omeka-s404-network
+      - omeka-s410-network
     ports:
       - "8080:80"
     links:
@@ -33,7 +33,7 @@ services:
     image: 67911151/omekas410docker:latest
     restart: always
     networks:
-      - omeka-s404-network
+      - omeka-s410-network
     ports:
       - "80:80"
     links:
@@ -46,4 +46,4 @@ volumes:
   omeka:
 
 networks:
-  omeka-s404-network:  
+  omeka-s410-network:  
