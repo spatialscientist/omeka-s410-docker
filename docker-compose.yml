@@ -30,7 +30,7 @@ services:
     depends_on:
       - mariadb
     build: ./
-    image: 67911151/omekas404docker:latest
+    image: 67911151/omekas410docker:latest
     restart: always
     networks:
       - omeka-s404-network
